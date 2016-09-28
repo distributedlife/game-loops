@@ -1,0 +1,50 @@
+{
+  "name": "game-loops",
+  "version": "1.0.0",
+  "description": "Several kinds of game loop",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register -c -S -R progress src/**/*spec*.js",
+    "predist": "rm -rf dist",
+    "dist": "babel src --out-dir dist --sourceMaps inline --comments --copy-files --ignore *-spec.js",
+    "prepublish": "npm run dist"
+  },
+  "files": [
+    "package.json",
+    "dist/",
+    "README.md"
+  ],
+  "keywords": [
+    "game",
+    "loop",
+    "javascript",
+    "physics",
+    "fixed",
+    "timestep",
+    "variable"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.0",
+    "require-inject": "^1.4.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
+  },
+  "author": "Ryan Boucher",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "moment": "^2.15.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/distributedlife/game-loops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/distributedlife/game-loops/issues"
+  },
+  "homepage": "https://github.com/distributedlife/game-loops#readme"
+}
