@@ -7,7 +7,7 @@ export default function (isPaused, onStep) {
   const updateT0 = (t1) => (t0 = t1);
 
   function doRunning (t1) {
-    let frameΔ = (t1 - t0);
+    const frameΔ = (t1 - t0);
     updateT0(t1);
 
     if (frameΔ > 0) {

@@ -7,7 +7,8 @@
     "test": "mocha --compilers js:babel-register -c -S -R progress src/**/*spec*.js",
     "predist": "rm -rf dist",
     "dist": "babel src --out-dir dist --sourceMaps inline --comments --copy-files --ignore *-spec.js",
-    "prepublish": "npm run dist"
+    "prepublish": "npm run dist",
+    "lint": "eslint src --ext .js --ignore-pattern *-spec.js"
   },
   "files": [
     "package.json",
