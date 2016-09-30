@@ -14,14 +14,15 @@ describe('fixed-time-step', () => {
   let loop;
   let callback;
   beforeEach(() => {
-    valueOf.returns(0);
+    valueOf.returns(1);
 
     callback = sinon.spy();
-    loop = createLoop(configuredDelta, () => false, callback)
+    loop = createLoop(configuredDelta, () => false, callback);
+    loop();
   })
 
   it('should execute the function if the configured delta has elapsed', () => {
-    valueOf.returns(20);
+    valueOf.returns(21);
     loop();
 
     expect(callback).to.have.been.called;
@@ -43,11 +44,11 @@ describe('fixed-time-step', () => {
     loop();
     expect(callback).not.to.have.been.called;
 
-    valueOf.returns(39);
+    valueOf.returns(40);
     loop();
     expect(callback).to.have.callCount(1);
 
-    valueOf.returns(40);
+    valueOf.returns(41);
     loop();
     expect(callback).to.have.callCount(2);
   });

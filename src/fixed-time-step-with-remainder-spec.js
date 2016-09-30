@@ -15,15 +15,16 @@ describe('fixed-time-step-with-remainder', () => {
   let callback;
   let remainderCallback;
   beforeEach(() => {
-    valueOf.returns(0);
+    valueOf.returns(1);
 
     callback = sinon.spy();
     remainderCallback = sinon.spy();
     loop = createLoop(configuredDelta, () => false, callback, remainderCallback)
+    loop();
   })
 
   it('should execute the function if the configured delta has elapsed', () => {
-    valueOf.returns(20);
+    valueOf.returns(21);
     loop();
 
     expect(callback).to.have.been.called;
@@ -46,11 +47,11 @@ describe('fixed-time-step-with-remainder', () => {
     loop();
     expect(callback).not.to.have.been.called;
 
-    valueOf.returns(39);
+    valueOf.returns(40);
     loop();
     expect(callback).to.have.callCount(1);
 
-    valueOf.returns(40);
+    valueOf.returns(41);
     loop();
     expect(callback).to.have.callCount(2);
   });
@@ -59,7 +60,7 @@ describe('fixed-time-step-with-remainder', () => {
     valueOf.returns(25);
     loop();
 
-    expect(remainderCallback).to.have.been.calledWith(5, 25)
+    expect(remainderCallback).to.have.been.calledWith(4, 24)
   })
 
   it('should pass the configuredDelta to the callback', () => {

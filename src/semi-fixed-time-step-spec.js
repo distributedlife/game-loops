@@ -14,28 +14,29 @@ describe('semi-fixed-time-step', () => {
   let loop;
   let callback;
   beforeEach(() => {
-    valueOf.returns(0);
+    valueOf.returns(1);
 
     callback = sinon.spy();
     loop = createLoop(maxDelta, () => false, callback)
+    loop();
   })
 
   it('should not execute the function if no time has elapsed', () => {
-    valueOf.returns(0);
+    valueOf.returns(1);
     loop();
 
     expect(callback).not.to.have.been.called;
   });
 
   it('should execute the function if any time has elapsed', () => {
-    valueOf.returns(1);
+    valueOf.returns(2);
     loop();
 
     expect(callback).to.have.been.called;
   });
 
   it('should pass the delta and elapsed time to the callback', () => {
-    valueOf.returns(2);
+    valueOf.returns(3);
     loop();
 
     expect(callback).to.have.been.calledWith(2, 2);
@@ -53,7 +54,7 @@ describe('semi-fixed-time-step', () => {
     loop();
 
     expect(callback).to.have.been.calledWith(20, 20);
-    expect(callback).to.have.been.calledWith(5, 25);
+    expect(callback).to.have.been.calledWith(4, 24);
     expect(callback).to.have.been.calledTwice;
   });
 

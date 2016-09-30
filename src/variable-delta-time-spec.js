@@ -13,28 +13,29 @@ describe('variable-delta-time', () => {
   let loop;
   let callback;
   beforeEach(() => {
-    valueOf.returns(0);
+    valueOf.returns(1);
 
     callback = sinon.spy();
     loop = createLoop(() => false, callback)
+    loop();
   })
 
   it('should not execute the function if no time has elapsed', () => {
-    valueOf.returns(0);
+    valueOf.returns(1);
     loop();
 
     expect(callback).not.to.have.been.called;
   });
 
   it('should execute the function if any time has elapsed', () => {
-    valueOf.returns(1);
+    valueOf.returns(2);
     loop();
 
     expect(callback).to.have.been.called;
   });
 
   it('should pass the delta and and elapsed time to the callback', () => {
-    valueOf.returns(2);
+    valueOf.returns(3);
 
     loop();
     expect(callback).to.have.been.calledWith(2, 2);
@@ -42,11 +43,11 @@ describe('variable-delta-time', () => {
     valueOf.returns(12);
 
     loop();
-    expect(callback).to.have.been.calledWith(10, 12);
+    expect(callback).to.have.been.calledWith(9, 11);
   });
 
   it('should not execute the callback multiple times if more time has passed', () => {
-    valueOf.returns(2500);
+    valueOf.returns(2501);
     loop();
 
     expect(callback).to.have.been.calledWith(2500);

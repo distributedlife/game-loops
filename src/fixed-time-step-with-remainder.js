@@ -1,7 +1,7 @@
 import now from './now';
 
 export default function (Δ, isPaused, onStep, onRemainder) {
-  let t0 = now();
+  let t0;
   let accumulator = 0;
   let t = 0;
 
@@ -9,7 +9,6 @@ export default function (Δ, isPaused, onStep, onRemainder) {
 
   function doRunning (t1) {
     accumulator += (t1 - t0);
-    updateT0(t1);
 
     while(accumulator >= Δ) {
       t += Δ;
@@ -21,12 +20,13 @@ export default function (Δ, isPaused, onStep, onRemainder) {
   }
 
   return function step () {
+    t0 = t0 || now();
     const t1 = now();
 
-    if (isPaused()) {
-      updateT0(t1);
-    } else {
+    if (!isPaused()) {
       doRunning(t1);
     }
+
+    updateT0(t1);
   }
 }
