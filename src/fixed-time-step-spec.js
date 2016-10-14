@@ -35,6 +35,16 @@ describe('fixed-time-step', () => {
     expect(callback).to.have.callCount(3);
   });
 
+  it('should cap the number of executions to a configured value', () => {
+    const cappedLoop = createLoop(configuredDelta, () => false, callback, 20);
+    cappedLoop();
+
+    valueOf.returns(65);
+    cappedLoop();
+
+    expect(callback).to.have.callCount(1);
+  });
+
   it('should accumulate left over milliseconds between loops', () => {
     valueOf.returns(5);
     loop();

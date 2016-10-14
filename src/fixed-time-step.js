@@ -1,6 +1,6 @@
 import now from './now';
 
-export default function (Δ, isPaused, onStep) {
+export default function (Δ, isPaused, onStep, maxFrameStep = Infinity) {
   let t0;
   let accumulator = 0;
   let t = 0;
@@ -8,7 +8,8 @@ export default function (Δ, isPaused, onStep) {
   const updateT0 = (t1) => (t0 = t1);
 
   function doRunning (t1) {
-    accumulator += (t1 - t0);
+    const frameStep = (t1 - t0);
+    accumulator += Math.min(frameStep, maxFrameStep);
 
     while(accumulator >= Δ) {
       t += Δ;

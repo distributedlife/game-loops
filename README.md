@@ -66,7 +66,20 @@ Calculates time between invocations and uses that as the delta.
 As variable but caps it at a delta you define.
 
 # fixed timestep
-Set the timestep to some number of milliseconds. Say 1000/60 for 60 frames per second. This means that the callback will _always_ receive the timestep specified on frame.
+Set the timestep to some number of milliseconds. Say 1000/60 for 60 frames per second. This means that the callback will _always_ receive the timestep specified on frame. Will call your function `frameDelta / ms` times
+
+Accepts an _optional_ final parameter to limit the frameDelta to some number of ms.
+
+```javascript
+const fixedTimeStep = createFixedTimeStep(ms, isPaused, onFrame, maxMS);
+```
+
 
 # fixed timestep with remainder
-Like fixed timestep but your `onRemainder` function is called with the remainder of ms. You can determine how far through a frame you are to render the world. It's up to tou.
+Like fixed timestep but your `onRemainder` function is called with the remainder of ms. You can determine how far through a frame you are to render the world. It's up to you. Will call your function `frameDelta / ms` times.
+
+Accepts an _optional_ final parameter to limit the frameDelta to some number of ms.
+
+```javascript
+const withRemainder = createFixedTimeStepWithRemainder(ms, isPaused, onFrame, onRemainder, maxMS);
+```

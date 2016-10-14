@@ -63,6 +63,16 @@ describe('fixed-time-step-with-remainder', () => {
     expect(remainderCallback).to.have.been.calledWith(4, 24)
   })
 
+  it('should cap the number of executions to a configured value', () => {
+    const cappedLoop = createLoop(configuredDelta, () => false, callback, remainderCallback, 20);
+    cappedLoop();
+
+    valueOf.returns(65);
+    cappedLoop();
+
+    expect(callback).to.have.callCount(1);
+  });
+
   it('should pass the configuredDelta to the callback', () => {
     valueOf.returns(25);
     loop();
