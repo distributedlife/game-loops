@@ -1,6 +1,6 @@
 {
   "name": "game-loops",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Several kinds of game loop",
   "main": "dist/index.js",
   "scripts": {
